@@ -445,7 +445,7 @@ Version      : 1.0
 
 /*============================================
 Right Click Disable
-============================================== 
+============================================== */
 
 document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
