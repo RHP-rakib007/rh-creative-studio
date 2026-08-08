@@ -445,7 +445,7 @@ Version      : 1.0
 
 /*============================================
 Right Click Disable
-============================================== */
+============================================== 
 
 document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
@@ -828,11 +828,45 @@ $(function () {
             dataType: 'json'
         }).done(function (res) {
             if (res.success) {
-                $msg.removeClass('hidden').removeClass('text-danger')
-                    .addClass('h4 text-left tada animated text-success')
-                    .text('Message sent! I will get back to you soon.');
-                $form[0].reset();
-            } else {
+
+    $btn
+        .addClass('contact-success-btn')
+        .html('Message sent! <i class="ri-check-line"></i>');
+
+    $msg
+        .removeClass('hidden')
+        .removeClass('text-danger h4 text-left tada animated text-success')
+        .addClass('contact-success-message')
+        .html('<span class="contact-success-subtext">I will get back to you soon.</span>');
+
+    setTimeout(function () {
+        $msg.find('.contact-success-subtext').addClass('show');
+    }, 100);
+
+    setTimeout(function () {
+        $msg.find('.contact-success-subtext')
+            .removeClass('show')
+            .addClass('hide');
+    }, 3500);
+
+    setTimeout(function () {
+
+        $msg
+            .removeClass('contact-success-message')
+            .addClass('hidden')
+            .empty();
+
+        $btn
+            .removeClass('contact-success-btn')
+            .prop('disabled', false)
+            .html(originalBtnText);
+
+    }, 4300);
+
+    $form[0].reset();
+}
+
+else {
                 $msg.removeClass('hidden').addClass('h4 text-left text-danger')
                     .text('Something went wrong. Please try again.');
             }
@@ -840,8 +874,8 @@ $(function () {
             $msg.removeClass('hidden').addClass('h4 text-left text-danger')
                 .text('Something went wrong. Please try again.');
         }).always(function () {
-            $btn.prop('disabled', false).html(originalBtnText);
-        });
+    $btn.prop('disabled', false);
+});
     });
 });
 
@@ -871,8 +905,11 @@ reappears when paused/ended. No DOM swapping, so it can't break.
 ============================================ */
 $(document).on('click', '.custom-play .custom-play-btn', function (e) {
     e.stopPropagation();
+
     var video = $(this).siblings('video')[0];
+
     if (video) {
+        video.controls = true;
         video.play();
     }
 });

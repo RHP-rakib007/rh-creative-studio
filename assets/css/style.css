@@ -3177,6 +3177,46 @@ Ratio Control End
     margin-top: 10px;
 }
 
+/*
+* ----------------------------------------------------------------------------------------
+* 13.CONTACT CSS STYLE ( chatgpt )
+* ----------------------------------------------------------------------------------------
+*/
+/* Contact success animation */
+#msgSubmit.contact-success-message {
+    display: block;
+    margin-top: 10px;
+    min-height: 26px;
+}
+
+.contact-success-subtext {
+    display: block;
+    color: #18a66a;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.contact-success-subtext.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-success-subtext.hide {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+.theme-rhp-007.contact-success-btn {
+    background: #18a66a !important;
+    border-color: #18a66a !important;
+    color: #fff !important;
+}
+
+.theme-rhp-007.contact-success-btn:hover {
+    background: #18a66a !important;
+    border-color: #18a66a !important;
+}
 
 
 
