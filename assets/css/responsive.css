@@ -1144,21 +1144,23 @@
 
 @media only screen and (max-width: 1199px) {
     .project-item.style-two .project-content {
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 12px;
+        padding-right: 12px;
+        padding-bottom: -90px;
     }
 }
 
 @media only screen and (max-width: 375px) {
     .project-item.style-two .project-content {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: -90px;
     }
 }
 
 @media only screen and (max-width: 479px) {
     .project-item.style-two .project-content h3 {
-        font-size: 25px;
+        font-size: 8px;
     }
 }
 
@@ -1489,5 +1491,34 @@
 
     .tool-item {
         width: 66px;
+    }
+}
+
+/* ===================================================
+   PORTFOLIO CARDS — reclaim side space on mobile
+=================================================== */
+@media only screen and (max-width: 767px) {
+    .projects-area .container,
+    .container-inner {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .project-masonry-active {
+        --bs-gutter-x: 6px;
+    }
+
+    .project-item.style-two:has(.video-vertical) {
+        max-width: 260px;
+    }
+}
+
+/* ===================================================
+   MOBILE NAV — active-page underline should hug the text,
+   not stretch across the full tap-target width
+=================================================== */
+@media only screen and (max-width: 991px) {
+    .main-menu .navbar-collapse li.current-page > a {
+        display: inline-block;
     }
 }

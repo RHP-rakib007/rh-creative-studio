@@ -844,3 +844,53 @@ $(function () {
         });
     });
 });
+
+
+
+/* ============================================
+ACTIVE NAV LINK
+Highlights whichever page the visitor is currently on in the main menu.
+============================================ */
+$(function () {
+    var currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+    $('.navigation .nav-link-click').each(function () {
+        var linkPage = $(this).attr('href');
+        if (linkPage === currentPage) {
+            $(this).closest('li').addClass('current-page');
+        }
+    });
+});
+
+
+/* ============================================
+CUSTOM PLAY BUTTON OVERLAY
+The <video> tag underneath is a normal native video with controls —
+this just adds a custom play icon on top that hides once playing and
+reappears when paused/ended. No DOM swapping, so it can't break.
+============================================ */
+$(document).on('click', '.custom-play .custom-play-btn', function (e) {
+    e.stopPropagation();
+    var video = $(this).siblings('video')[0];
+    if (video) {
+        video.play();
+    }
+});
+
+document.addEventListener('play', function (e) {
+    if (e.target.tagName !== 'VIDEO') return;
+    var wrap = e.target.closest('.custom-play');
+    if (wrap) wrap.classList.add('is-playing');
+}, true);
+
+document.addEventListener('pause', function (e) {
+    if (e.target.tagName !== 'VIDEO') return;
+    var wrap = e.target.closest('.custom-play');
+    if (wrap) wrap.classList.remove('is-playing');
+}, true);
+
+document.addEventListener('ended', function (e) {
+    if (e.target.tagName !== 'VIDEO') return;
+    var wrap = e.target.closest('.custom-play');
+    if (wrap) wrap.classList.remove('is-playing');
+}, true);
