@@ -445,7 +445,7 @@ Version      : 1.0
 
 /*============================================
 Right Click Disable
-============================================== */
+============================================== 
 
 document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
@@ -498,6 +498,13 @@ $(function () {
     var $loadBtn = $('#loadMoreBtn');
     var PAGE_SIZE = 6;
     var perFilterVisible = {}; // works.html only: how many items currently shown, per filter
+    var activeTier = '*'; // Premium / Standard / all
+
+    function getActiveTier() {
+        var $current = $(".tier-filter li.current");
+        if ($current.length) return $current.attr("data-tier");
+        return '*';
+    }
 
     var isHomePage =
         window.location.pathname.includes("index.html") ||
@@ -523,6 +530,7 @@ $(function () {
     // On works.html it remembers how many items of THIS filter are already
     // "unlocked" (perFilterVisible), unless resetPage forces it back to 6
     // (a fresh tab click always restarts at 6).
+    // Category (selector) AND tier (Premium/Standard) both have to match.
     function applyFilter(selector, resetPage) {
         var visible = PAGE_SIZE;
 
@@ -538,7 +546,11 @@ $(function () {
 
         $items.each(function () {
             var $it = $(this);
-            if ($it.is(selector)) {
+            var matchesCategory = $it.is(selector);
+            var matchesTier = activeTier === '*' || $it.is(activeTier);
+            var matches = matchesCategory && matchesTier;
+
+            if (matches) {
                 total++;
                 count++;
                 var show = isHomePage ? count <= PAGE_SIZE : count <= visible;
@@ -550,6 +562,14 @@ $(function () {
 
         if (!isHomePage) setLoadBtnState(visible, total);
     }
+
+    // ---- Tier clicks (Premium / Standard / All) ----
+    $(".tier-filter li").on("click", function () {
+        $(".tier-filter li").removeClass("current");
+        $(this).addClass("current");
+        activeTier = $(this).attr("data-tier");
+        applyFilter(getActiveSelector(), true);
+    });
 
     // ---- Tab clicks ----
     $(".project-filter li").on("click", function () {
@@ -593,6 +613,7 @@ $(function () {
     }
 
     if (!initialSelector) initialSelector = getActiveSelector();
+    activeTier = getActiveTier();
 
     applyFilter(initialSelector, true);
 
@@ -931,3 +952,45 @@ document.addEventListener('ended', function (e) {
     var wrap = e.target.closest('.custom-play');
     if (wrap) wrap.classList.remove('is-playing');
 }, true);
+
+
+/* ============================================
+DARK / LIGHT MODE TOGGLE
+Remembers the visitor's choice across pages using localStorage.
+============================================ */
+$(function () {
+    var $body = $('body');
+    var $btn = $('#themeToggle');
+    var $icon = $btn.find('i');
+    var $logo = $('#siteLogo');
+    var $logoMobile = $('.siteLogoMobile');
+    var $clientLogos = $('.client-logo');
+
+    function applyTheme(theme) {
+        if (theme === 'light') {
+            $body.addClass('light-mode');
+            $icon.removeClass('ri-sun-line').addClass('ri-moon-line');
+            if ($logo.length) $logo.attr('src', $logo.data('light'));
+            if ($logoMobile.length) $logoMobile.attr('src', $logoMobile.data('light'));
+            $clientLogos.each(function () {
+                $(this).attr('src', $(this).data('light'));
+            });
+        } else {
+            $body.removeClass('light-mode');
+            $icon.removeClass('ri-moon-line').addClass('ri-sun-line');
+            if ($logo.length) $logo.attr('src', $logo.data('dark'));
+            if ($logoMobile.length) $logoMobile.attr('src', $logoMobile.data('dark'));
+            $clientLogos.each(function () {
+                $(this).attr('src', $(this).data('dark'));
+            });
+        }
+    }
+
+    applyTheme(localStorage.getItem('rhp-theme') || 'dark');
+
+    $btn.on('click', function () {
+        var next = $body.hasClass('light-mode') ? 'dark' : 'light';
+        applyTheme(next);
+        localStorage.setItem('rhp-theme', next);
+    });
+});

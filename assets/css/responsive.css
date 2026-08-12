@@ -50,7 +50,7 @@
 
 
     .about-area {
-        padding-top: 80px;
+        padding-top: 130px;
     }
 
     .resume-area {
@@ -154,11 +154,15 @@
     }
 
     .menu-rhp {
+        display: flex !important;
+    }
+
+    .menu-rhp a.theme-rhp-007 {
         display: none;
     }
 
-    .section-title p {
-        padding: 0px;
+    .theme-toggle-btn {
+        margin-right: 45px;
     }
 
     .about-content-part {
@@ -189,11 +193,15 @@
     }
 
     .menu-rhp {
+        display: flex !important;
+    }
+
+    .menu-rhp a.theme-rhp-007 {
         display: none;
     }
 
-    .section-title {
-        margin-bottom: 30px;
+    .theme-toggle-btn {
+        margin-right: 45px;
     }
 
     .main-menu .navbar-collapse li a:hover {
@@ -246,7 +254,7 @@
     }
 
     .about-area {
-        padding-top: 60px;
+        padding-top: 70px;
     }
 
     .about-content-part {
@@ -1488,7 +1496,6 @@
     .tools-list {
         gap: 14px;
     }
-
     .tool-item {
         width: 66px;
     }
@@ -1520,5 +1527,88 @@
 @media only screen and (max-width: 991px) {
     .main-menu .navbar-collapse li.current-page > a {
         display: inline-block;
+    }
+}
+
+/* ===================================================
+   CARD GAP FIX — mobile/tablet (forced with !important
+   since this kept getting overridden by other rules)
+=================================================== */
+@media only screen and (max-width: 991px) {
+    .process-item {
+        margin-bottom: 24px !important;
+    }
+
+    .service-item-two,
+    .faq-item {
+        margin-bottom: 20px !important;
+    }
+}
+
+/* ===================================================
+   MOBILE HEADER — theme toggle sits LEFT of the hamburger,
+   and shrink it slightly so the header doesn't grow taller
+=================================================== */
+@media only screen and (max-width: 991px) {
+    .header-inner {
+        display: flex !important;
+    }
+
+    .menu-rhp {
+        order: -1;
+    }
+
+    .nav-outer {
+        order: 2;
+    }
+
+    .theme-toggle-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+        margin-right: 115px;
+    }
+}
+
+/* ===================================================
+   THEME TOGGLE — move to LEFT of the hamburger on mobile
+=================================================== */
+@media only screen and (max-width: 991px) {
+    .header-inner {
+        flex-wrap: nowrap;
+    }
+
+    .nav-outer {
+        order: 2;
+    }
+
+    .menu-rhp {
+        order: 1;
+        margin-left: auto;
+    }
+}
+
+/* ===================================================
+   MOBILE DROPDOWN MENU — light mode background/text
+=================================================== */
+body.light-mode .main-menu .navbar-collapse {
+    background-color: #ffffff !important;
+}
+
+body.light-mode .main-menu .navbar-collapse li a {
+    color: #17171a !important;
+}
+
+/* ===================================================
+   PROCESS/SERVICE/FAQ ROW GUTTER — Bootstrap-native
+   vertical gap between wrapped cards (belt-and-suspenders
+   alongside the margin-bottom fix above)
+=================================================== */
+@media only screen and (max-width: 991px) {
+    .process-row,
+    .service-grid-row,
+    .faq-list {
+        --bs-gutter-y: 24px;
+        row-gap: 24px;
     }
 }

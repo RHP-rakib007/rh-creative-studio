@@ -72,7 +72,7 @@
                     <!-- START LOGO DESIGN AREA -->
                     <div class="logo-outer">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo.png" alt="Logo" title="Logo" /></a>
+                            <a href="index.html"><img id="siteLogo" src="assets/images/logo.png" data-dark="assets/images/logo.png" data-light="assets/images/logo-dark.png" alt="Logo" title="Logo" /></a>
                         </div>
                     </div>
                     <!-- / END LOGO DESIGN AREA -->
@@ -83,7 +83,7 @@
                             <div class="navbar-header">
                                 <div class="mobile-logo">
                                     <a href="index.html">
-                                        <img src="assets/images/logo.png" alt="Logo" title="Logo" />
+                                        <img class="siteLogoMobile" src="assets/images/logo.png" data-dark="assets/images/logo.png" data-light="assets/images/logo-dark.png" alt="Logo" title="Logo" />
                                     </a>
                                 </div>
                                 <!-- Toggle Button -->
@@ -105,7 +105,8 @@
                         </nav>
                         <!-- / END NAV DESIGN AREA -->
                     </div>
-                    <div class="menu-rhp">
+                        <div class="menu-rhp">
+                        <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle light/dark mode"><i class="ri-sun-line"></i></button>
                         <a href="contact.html" class="theme-rhp-007">Hire Me<i class="ri-shake-hands-line"></i></a>
                     </div>
                 </div>
@@ -135,6 +136,10 @@
                     <li data-filter=".brand-motion">Brand Motion</li>
                     <li data-filter=".creative-image">Creative Image</li>
                     <li data-filter=".growth-strategy">Growth Strategy</li>
+                </ul>
+                <ul class="tier-filter">
+                    <li class="current" data-tier=".premium">Premium</li>
+                    <li data-tier=".standard">Standard</li>
                 </ul>
                 <div class="row project-masonry-active">
                                                 <!------------------------- HORIZONTAL PROJECT VIDEO ZONE -------------------------->
